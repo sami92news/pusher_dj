@@ -9,10 +9,12 @@ https://docs.djangoproject.com/en/2.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
-
+import json
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from shutil import copyfile
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -36,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'webpush',
-    'push_notifications'
+    'push_notifications',
+    'webpushdjango'
 ]
 
 MIDDLEWARE = [
@@ -78,6 +81,34 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+config_path = (str(BASE_DIR)+'/config.json')
+config_path = config_path.replace('\\/', '\\')
+config_path = config_path.replace('//', '/')
+if not os.path.exists(config_path):
+    temp_path = config_path.replace('config.json', 'example.config.json')
+    copyfile(temp_path, config_path)
+
+
+LOCALHOST = False
+LIVE_SITE_BASE_URL = ''
+POST_IMAGE_BASE_DIR = ''
+
+with open(config_path, 'r') as site_config:
+    config_info = json.load(site_config)
+    env_type = config_info.get('env')
+    if config_info.get('local'):
+        LOCALHOST = True
+        ALLOWED_HOSTS = ['*']
+    if env_type == 'dev':
+        DEBUG = True
+        ALLOWED_HOSTS = ['*']
+    else:
+        DEBUG = False
+    active_db = config_info.get('active_db')
+    if active_db:
+        db_config = config_info.get(active_db)
+        if db_config:
+            DATABASES['default'] = config_info[active_db]
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators

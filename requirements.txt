@@ -15,3 +15,16 @@ pywebpush==1.6.0
 requests==2.19.1
 six==1.11.0
 urllib3==1.23
+#requests==2.25.1
+#Django==3.1.5
+#djangorestframework==3.12.2
+#sudo apt-get install python3-dev default-libmysqlclient-dev
+mysqlclient==2.0.3
+#python-dateutil==2.8.1
+#psycopg2-binary==2.8.6
+#Pillow==8.1.2
+#sudo apt-get install apache2-dev
+#mod_wsgi==4.7.1
+#django-otto-admin==0.1.2
+#pyquery==1.4.3
+#pywebpush==1.14.0

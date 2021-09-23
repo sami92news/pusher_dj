@@ -15,6 +15,12 @@ class SubscriptionInfo(models.Model):
     auth = models.CharField(max_length=100)
     p256dh = models.CharField(max_length=100)
 
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        #res = super().save()
+        res = 0
+        return res
+
 
 class PushInformation(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='webpush_info', blank=True, null=True, on_delete=models.CASCADE)

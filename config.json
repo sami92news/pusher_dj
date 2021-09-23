@@ -1,0 +1,28 @@
+{
+    "active_db": "mysql",
+    "env": "dev",
+    "local" : 1,
+    "site_name": "eng",
+    "postgresql": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "pusher",
+        "USER": "jang",
+        "PASSWORD": "123"
+    },
+    "mysql": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "pusher",
+        "USER": "root",
+        "PASSWORD": "123"
+    },
+    "post_image": {
+        "urdu": {
+            "BASE_URL": "http://127.0.0.1:8001/",
+            "BASE_DIR": "/var/www/aur.92newshd.tv/"
+        },
+        "eng": {
+            "BASE_URL": "http://127.0.0.1:8001/",
+            "BASE_DIR": "/var/www/eng92/"
+        }
+    }
+}
